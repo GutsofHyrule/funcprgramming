@@ -20,9 +20,9 @@
 var fixedValue = 4;
 
 // Only change code below this line
-function incrementer () {
+function incrementer (value) {
 
-
+  return value + 1;
   // Only change code above this line
 }
 
@@ -42,25 +42,20 @@ function incrementer () {
 var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
 
 // Change code below this line
-function add (bookName) {
+function add (list, bookName) {
 
   bookList.push(bookName);
-  return bookList;
+  return [...list, bookName];
   
   // Change code above this line
 }
 
 // Change code below this line
-function remove (bookName) {
-  var book_index = bookList.indexOf(bookName);
-  if (book_index >= 0) {
-
-    bookList.splice(book_index, 1);
-    return bookList;
-
+function remove (list, bookName) {
+return list.filter(book => book !== bookName);
     // Change code above this line
     }
-}
+
 
 var newBookList = add(bookList, 'A Brief History of Time');
 var newerBookList = remove(bookList, 'On The Electrodynamics of Moving Bodies');
@@ -86,14 +81,14 @@ console.log(bookList);
 
 // See below for an example using the map method on the users array to return a new array containing only the names of the users as elements. For simplicity, the example only uses the first argument of the callback.
 
-// const users = [
-//   { name: 'John', age: 34 },
-//   { name: 'Amy', age: 20 },
-//   { name: 'camperCat', age: 10 }
-// ];
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
 
-// const names = users.map(user => user.name);
-// console.log(names); // [ 'John', 'Amy', 'camperCat' ]
+const names = users.map(user => user.name);
+console.log(names); // [ 'John', 'Amy', 'camperCat' ]
 
 // The watchList array holds objects with information on several movies. Use map on watchList to assign a new array of objects with only title and rating keys to the ratings variable. The code in the editor currently uses a for loop to do this, so you should replace the loop functionality with your map expression.
 
@@ -214,10 +209,10 @@ var watchList = [
   
   // Only change code below this line
   
-  var ratings = [];
-  for(var i=0; i < watchList.length; i++){
-    ratings.push({title: watchList[i]["Title"],  rating: watchList[i]["imdbRating"]});
-  }
+ const ratings = watchList.map(item => ({
+   title: item['Title'],
+   rating: item['imdbRating']
+ }))
   
   // Only change code above this line
   
@@ -239,15 +234,15 @@ var watchList = [
 var s = [23, 65, 98, 5];
 
 Array.prototype.myMap = function(callback) {
-  var newArray = [];
+  var newArray = []; // The local array
 
   // Add your code below this line
   for (let i = 0; i < this.length; i++) {
     newArray.push(callback(this[i]));
   }
   // Add your code above this line
-
   return newArray;
+
 };
 
 var new_s = s.myMap(function(item) {
@@ -263,14 +258,14 @@ var new_s = s.myMap(function(item) {
 
 // See below for an example using the filter method on the users array to return a new array containing only the users under the age of 30. For simplicity, the example only uses the first argument of the callback.
 
-// const users = [
-//   { name: 'John', age: 34 },
-//   { name: 'Amy', age: 20 },
-//   { name: 'camperCat', age: 10 }
-// ];
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
 
-// const usersUnder30 = users.filter(user => user.age < 30);
-// console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 } ]
+const usersUnder30 = users.filter(user => user.age < 30);
+console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 } ]
 // The variable watchList holds an array of objects with information on several movies. Use a combination of filter and map on watchList to assign a new array of objects with only title and rating keys. The new array should only include objects where imdbRating is greater than or equal to 8.0. Note that the rating values are saved as strings in the object and you may need to convert them into numbers to perform mathematical operations on them.
 
 
@@ -390,7 +385,16 @@ var watchList = [
 
 // Only change code below this line
 
-var filteredList;
+var filteredList = watchList
+.map(movie => {
+  return {
+    title: movie.title,
+    rating: movie.imdbRating
+  };
+})
+.filter(movie => {
+  return parseFloat(movie.rating) >= 8.0;
+});
 
 // Only change code above this line
 
@@ -407,13 +411,19 @@ var s = [23, 65, 98, 5];
 
 Array.prototype.myFilter = function(callback) {
   // Only change code below this line
-  var newArray = [];
+  let newArray = [];
+  this.forEach(function(x){
+    if(callback(x) ==  true){
+      newArray.push(x);
+    }
+  })
   // Only change code above this line
+
   return newArray;
 };
 
 var new_s = s.myFilter(function(item) {
-  return item % 2 === 1;
+  return item % 2 === 1; //Checks if the item passed is odd 
 });
 
 
@@ -423,14 +433,14 @@ var new_s = s.myFilter(function(item) {
 
 // Here's an example:
 
-// var arr = ["Cat", "Dog", "Tiger", "Zebra"];
-// var newArray = arr.slice(1, 3);
-// // Sets newArray to ["Dog", "Tiger"]
+var arr = ["Cat", "Dog", "Tiger", "Zebra"];
+var newArray = arr.slice(1, 3);
+// Sets newArray to ["Dog", "Tiger"]
 // Use the slice method in the sliceArray function to return part of the anim array given the provided beginSlice and endSlice indices. The function should return an array.
 
 function sliceArray(anim, beginSlice, endSlice) {
     // Only change code below this line
-  
+  return anim.slice(beginSlice,endSlice);
   
     // Only change code above this line
   }
@@ -440,9 +450,9 @@ function sliceArray(anim, beginSlice, endSlice) {
 //8.) Functional Programming: Remove Elements from an Array Using slice Instead of splice
 // A common pattern while working with arrays is when you want to remove items and keep the rest of the array. JavaScript offers the splice method for this, which takes arguments for the index of where to start removing items, then the number of items to remove. If the second argument is not provided, the default is to remove items through the end. However, the splice method mutates the original array it is called on. Here's an example:
 
-// var cities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
-// cities.splice(3, 1); // Returns "London" and deletes it from the cities array
-// // cities is now ["Chicago", "Delhi", "Islamabad", "Berlin"]
+var cities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+cities.splice(3, 1); // Returns "London" and deletes it from the cities array
+// cities is now ["Chicago", "Delhi", "Islamabad", "Berlin"]
 // As we saw in the last challenge, the slice method does not mutate the original array, but returns a new one which can be saved into a variable. Recall that the slice method takes two arguments for the indices to begin and end the slice (the end is non-inclusive), and returns those items in a new array. Using the slice method instead of splice helps to avoid any array-mutating side effects.
 
 // Rewrite the function nonMutatingSplice by using slice instead of splice. It should limit the provided cities array to a length of 3, and return a new array with only the first three items.
@@ -450,7 +460,7 @@ function sliceArray(anim, beginSlice, endSlice) {
 // Do not mutate the original array provided to the function.
 function nonMutatingSplice(cities) {
     // Only change code below this line
-    return cities.splice(3);
+    return cities.slice(0, 3);
   
     // Only change code above this line
   }
@@ -459,13 +469,13 @@ function nonMutatingSplice(cities) {
 
   //9.)Functional Programming: Combine Two Arrays Using the concat Method
 //   Concatenation means to join items end to end. JavaScript offers the concat method for both strings and arrays that work in the same way. For arrays, the method is called on one, then another array is provided as the argument to concat, which is added to the end of the first array. It returns a new array and does not mutate either of the original arrays. Here's an example:
-//   [1, 2, 3].concat([4, 5, 6]);
-//   // Returns a new array [1, 2, 3, 4, 5, 6]
+  [1, 2, 3].concat([4, 5, 6]);
+  // Returns a new array [1, 2, 3, 4, 5, 6]
 
 //   Use the concat method in the nonMutatingConcat function to concatenate attach to the end of original. The function should return the concatenated array.
 function nonMutatingConcat(original, attach) {
     // Only change code below this line
-  
+  return original.concat(attach);
   
     // Only change code above this line
   }
@@ -489,7 +499,7 @@ function nonMutatingConcat(original, attach) {
 //   Change the nonMutatingPush function so it uses concat to add newItem to the end of original instead of push. The function should return an array.
 function nonMutatingPush(original, newItem) {
     // Only change code below this line
-    return original.push(newItem);
+    return original.concat(newItem);
   
     // Only change code above this line
   }
@@ -507,26 +517,26 @@ function nonMutatingPush(original, newItem) {
 
 // See below for an example using reduce on the users array to return the sum of all the users' ages. For simplicity, the example only uses the first and second arguments.
 
-// const users = [
-//   { name: 'John', age: 34 },
-//   { name: 'Amy', age: 20 },
-//   { name: 'camperCat', age: 10 }
-// ];
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
 
-// const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
-// console.log(sumOfAges); // 64
+const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
+console.log(sumOfAges); // 64
 // In another example, see how an object can be returned containing the names of the users as properties with their ages as values.
 
-// const users = [
-//   { name: 'John', age: 34 },
-//   { name: 'Amy', age: 20 },
-//   { name: 'camperCat', age: 10 }
-// ];
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
 
-// const usersObj = users.reduce((obj, user) => {
-//   obj[user.name] = user.age;
-//   return obj;
-// }, {});
+const usersObj = users.reduce((obj, user) => {
+  obj[user.name] = user.age;
+  return obj;
+}, {});
 // console.log(usersObj); // { John: 34, Amy: 20, camperCat: 10 }
 // The variable watchList holds an array of objects with information on several movies. Use reduce to find the average IMDB rating of the movies directed by Christopher Nolan. Recall from prior challenges how to filter data and map over it to pull what you need. You may need to create other variables, and return the average rating from getRating function. Note that the rating values are saved as strings in the object and need to be converted into numbers before they are used in any mathematical operations.
 
@@ -646,10 +656,11 @@ var watchList = [
   
   function getRating(watchList){
     // Only change code below this line
-    var averageRating;
+    var averageRating = watchList.filter(film => film.Director === "Christopher Nolan")
+    .map(film => Number(film.imdbRating))
+    .reduce((sumOfRatings, rating) => sumOfRatings + rating) / watchList.filter(film => film.Director === "Christopher Nolan").length;
   
   
-    // Only change code above this line
     return averageRating;
   }
   console.log(getRating(watchList));
@@ -664,7 +675,9 @@ var watchList = [
 
 const squareList = arr => {
     // Only change code below this line
-    return arr;
+    return arr
+    .filter(num => num > 0 && num % parseInt(num) === 0)
+    .map(num => Math.pow(num, 2));
     // Only change code above this line
   };
   
