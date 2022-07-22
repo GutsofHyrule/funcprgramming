@@ -22,7 +22,7 @@ var fixedValue = 4;
 // Only change code below this line
 function incrementer (value) {
 
-  return value + 1;
+
   // Only change code above this line
 }
 
@@ -44,15 +44,13 @@ var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Movi
 // Change code below this line
 function add (list, bookName) {
 
-  bookList.push(bookName);
-  return [...list, bookName];
-  
+ 
   // Change code above this line
 }
 
 // Change code below this line
 function remove (list, bookName) {
-return list.filter(book => book !== bookName);
+
     // Change code above this line
     }
 
@@ -209,10 +207,7 @@ var watchList = [
   
   // Only change code below this line
   
- const ratings = watchList.map(item => ({
-   title: item['Title'],
-   rating: item['imdbRating']
- }))
+ const ratings = watchList.map()
   
   // Only change code above this line
   
@@ -237,9 +232,7 @@ Array.prototype.myMap = function(callback) {
   var newArray = []; // The local array
 
   // Add your code below this line
-  for (let i = 0; i < this.length; i++) {
-    newArray.push(callback(this[i]));
-  }
+
   // Add your code above this line
   return newArray;
 
@@ -385,16 +378,7 @@ var watchList = [
 
 // Only change code below this line
 
-var filteredList = watchList
-.map(movie => {
-  return {
-    title: movie.title,
-    rating: movie.imdbRating
-  };
-})
-.filter(movie => {
-  return parseFloat(movie.rating) >= 8.0;
-});
+
 
 // Only change code above this line
 
@@ -411,12 +395,7 @@ var s = [23, 65, 98, 5];
 
 Array.prototype.myFilter = function(callback) {
   // Only change code below this line
-  let newArray = [];
-  this.forEach(function(x){
-    if(callback(x) ==  true){
-      newArray.push(x);
-    }
-  })
+
   // Only change code above this line
 
   return newArray;
@@ -440,7 +419,7 @@ var newArray = arr.slice(1, 3);
 
 function sliceArray(anim, beginSlice, endSlice) {
     // Only change code below this line
-  return anim.slice(beginSlice,endSlice);
+
   
     // Only change code above this line
   }
@@ -460,7 +439,7 @@ cities.splice(3, 1); // Returns "London" and deletes it from the cities array
 // Do not mutate the original array provided to the function.
 function nonMutatingSplice(cities) {
     // Only change code below this line
-    return cities.slice(0, 3);
+   
   
     // Only change code above this line
   }
@@ -475,7 +454,7 @@ function nonMutatingSplice(cities) {
 //   Use the concat method in the nonMutatingConcat function to concatenate attach to the end of original. The function should return the concatenated array.
 function nonMutatingConcat(original, attach) {
     // Only change code below this line
-  return original.concat(attach);
+  
   
     // Only change code above this line
   }
@@ -499,7 +478,7 @@ function nonMutatingConcat(original, attach) {
 //   Change the nonMutatingPush function so it uses concat to add newItem to the end of original instead of push. The function should return an array.
 function nonMutatingPush(original, newItem) {
     // Only change code below this line
-    return original.concat(newItem);
+   
   
     // Only change code above this line
   }
@@ -656,14 +635,9 @@ var watchList = [
   
   function getRating(watchList){
     // Only change code below this line
-    var averageRating = watchList.filter(film => film.Director === "Christopher Nolan")
-    .map(film => Number(film.imdbRating))
-    .reduce((sumOfRatings, rating) => sumOfRatings + rating) / watchList.filter(film => film.Director === "Christopher Nolan").length;
-  
-  
-    return averageRating;
+
   }
-  console.log(getRating(watchList));
+ 
 
 
   //12.)Functional Programming: Use Higher-Order Functions map, filter, or reduce to Solve a Complex Problem
@@ -675,9 +649,7 @@ var watchList = [
 
 const squareList = arr => {
     // Only change code below this line
-    return arr
-    .filter(num => num > 0 && num % parseInt(num) === 0)
-    .map(num => Math.pow(num, 2));
+
     // Only change code above this line
   };
   
@@ -723,7 +695,7 @@ const getTea = (numOfCups) => {
 };
 
 // Only change code below this line
-const tea4Team = null;
+
 // Only change code above this line
 
 
@@ -773,10 +745,10 @@ var Window = function(tabs) {
   
     // Only change code below this line
   
-    var tabsBeforeIndex = this.tabs.splice(0, index); // Get the tabs before the tab
-    var tabsAfterIndex = this.tabs.splice(index + 1); // Get the tabs after the tab
+    // Get the tabs before the tab
+     // Get the tabs after the tab
   
-    this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // Join them together
+    // Join them together
   
     // Only change code above this line
   

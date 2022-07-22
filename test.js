@@ -4,9 +4,7 @@ Array.prototype.myMap = function(callback) {
   var newArray = []; // The local array
 
   // Add your code below this line
-  for (let i = 0; i < this.length; i++) {
-    newArray.push(callback(this[i]));
-  }
+
   // Add your code above this line
 
   return newArray;
